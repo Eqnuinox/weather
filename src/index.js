@@ -12,9 +12,7 @@ const App = () => {
 
   const updateDecoding = async (text) => {
     const response = await decodingApiRequest(text);
-    console.log("GOVNO = ",response) 
     setDecodingResults(response)
-    console.log("GOVNOSHE",decodingResults)
 
   }
 
