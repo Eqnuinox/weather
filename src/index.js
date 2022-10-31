@@ -1,31 +1,32 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom/client';
-import { useEffect, useState } from 'react';
-import Header from './App';
 import { decodingApiRequest, weatherApiRequest } from './utils';
+import Header from './Header'
+import Page from './page';
 
 const App = () => {
 
-  const [decodingResults, setDecodingResults] = useState('')
-  const [searchResults, setSearchResults] = useState()
+
+  const[weatherData, setWeatherData] = useState([])
 
 
-  const updateDecoding = async (text) => {
-    const response = await decodingApiRequest(text);
-    setDecodingResults(response)
-
+  const updateDecoding = async (location) => {
+    const [decResponse] = await decodingApiRequest(location);
+    if (!decResponse) {
+      alert('Нет данных о таком городе...')
+      return
+    }
+    const wetResponse = await weatherApiRequest(decResponse);
+    setWeatherData(wetResponse);
   }
 
-  useEffect((decodingResults) => {
-    const response = decodingResults.map((location) => weatherApiRequest(location))
-    setSearchResults(response);
 
-  }, [decodingResults])
 
   return (
     <>
       <div>
-        <Header startDecoding={updateDecoding} />
+        <Header startSearch={updateDecoding} />
+        <Page weatherData={weatherData}/>
       </div>
     </>
   )
