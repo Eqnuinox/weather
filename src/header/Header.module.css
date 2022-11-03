@@ -1,0 +1,13 @@
+.header{
+    display: flex;
+    flex-direction: row;
+    height: 20px !important;
+    width: 100%;
+    justify-content: center;
+    padding: 20px;
+    border-bottom:1px solid black ;
+}
+
+button{
+    margin: 0 10px;
+}

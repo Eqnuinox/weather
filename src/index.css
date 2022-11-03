@@ -1,0 +1,12 @@
+html{
+    min-height:90vh;
+}
+
+#root{
+    min-height: 90vh;
+}
+
+.main{
+    display: flex;
+    flex-direction: column;
+}

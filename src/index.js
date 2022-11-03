@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import { decodingApiRequest, weatherApiRequest } from './utils';
-import Header from './Header'
+import Header from './header/Header'
 import Page from './page';
+import DetalesPage from './Days/DetalisPage';
+import { Routes, Route, BrowserRouter } from 'react-router-dom';
+import './index.css'
 
 const App = () => {
 
 
-  const[weatherData, setWeatherData] = useState([])
+  const [weatherData, setWeatherData] = useState([])
 
 
   const updateDecoding = async (location) => {
@@ -24,10 +27,15 @@ const App = () => {
 
   return (
     <>
-      <div>
-        <Header startSearch={updateDecoding} />
-        <Page weatherData={weatherData}/>
-      </div>
+      <BrowserRouter>
+        <div className='main'>
+            <Header startSearch={updateDecoding} />
+          <Routes>
+            <Route path="/" element={<Page weatherData={weatherData} /> }/>
+            <Route path="/in/:City" element={<DetalesPage /> }/>
+          </Routes>
+        </div>
+      </BrowserRouter>
     </>
   )
 }
